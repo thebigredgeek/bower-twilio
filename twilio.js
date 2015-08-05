@@ -1,5 +1,5 @@
 var Twilio = (function(){
-    var VERSION = "e02c42e";
+    var VERSION = "3716fe1";
     var CommandQueue = (function() {
         function CommandQueue(cmdList, object) {
             cmdList = cmdList || [];
@@ -71,9 +71,16 @@ var Twilio = (function(){
         }
     };
     ref.parentNode.insertBefore(el, ref);
-    var exports = {
-        Device: deviceCmdQ,
-        EventStream: eventStreamCmdQ
-    };
+    var Object_create = typeof Object.create === 'function'
+        ? function(prototype) { return Object.create(prototype); }
+        : function(prototype) {
+            function C(){}
+            C.prototype = prototype;
+            return new C();
+        };
+    var Loader = eval('(function(){function Loader(){};return Loader})()');
+    var exports = Object_create(Loader.prototype);
+    exports['Device'] = deviceCmdQ;
+    exports['EventStream'] = eventStreamCmdQ;
     return exports;
 })();
